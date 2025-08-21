@@ -34,17 +34,19 @@ app.get('/image-proxy/:encodedUrl', async (req, res) => {
     // Force 485px width for signature consistency
     // Remove any existing width/height parameters and set to exact signature size
     let resizedUrl = imageUrl;
-    if (resizedUrl.includes('?')) {
-      // Remove existing width and height parameters
-      resizedUrl = resizedUrl.replace(/[?&]width=\d+/g, '');
-      resizedUrl = resizedUrl.replace(/[?&]height=\d+/g, '');
-      // Add our exact signature dimensions
-      resizedUrl = resizedUrl.includes('?') 
-        ? `${resizedUrl}&width=485&height=125` 
-        : `${resizedUrl}?width=485&height=125`;
-    } else {
-      resizedUrl = `${resizedUrl}?width=485&height=125`;
-    }
+    
+    // Parse the URL to properly handle query parameters
+    const urlObj = new URL(resizedUrl);
+    
+    // Remove existing width and height parameters
+    urlObj.searchParams.delete('width');
+    urlObj.searchParams.delete('height');
+    
+    // Add our exact signature dimensions
+    urlObj.searchParams.set('width', '485');
+    urlObj.searchParams.set('height', '125');
+    
+    resizedUrl = urlObj.toString();
     console.log('Resized URL:', resizedUrl);
     
     const response = await fetch(resizedUrl);
@@ -260,17 +262,19 @@ app.get('/image-proxy/:encodedUrl', async (req, res) => {
     // Force 485px width for signature consistency
     // Remove any existing width/height parameters and set to exact signature size
     let resizedUrl = imageUrl;
-    if (resizedUrl.includes('?')) {
-      // Remove existing width and height parameters
-      resizedUrl = resizedUrl.replace(/[?&]width=\d+/g, '');
-      resizedUrl = resizedUrl.replace(/[?&]height=\d+/g, '');
-      // Add our exact signature dimensions
-      resizedUrl = resizedUrl.includes('?') 
-        ? `${resizedUrl}&width=485&height=125` 
-        : `${resizedUrl}?width=485&height=125`;
-    } else {
-      resizedUrl = `${resizedUrl}?width=485&height=125`;
-    }
+    
+    // Parse the URL to properly handle query parameters
+    const urlObj = new URL(resizedUrl);
+    
+    // Remove existing width and height parameters
+    urlObj.searchParams.delete('width');
+    urlObj.searchParams.delete('height');
+    
+    // Add our exact signature dimensions
+    urlObj.searchParams.set('width', '485');
+    urlObj.searchParams.set('height', '125');
+    
+    resizedUrl = urlObj.toString();
     console.log('Resized URL:', resizedUrl);
     
     const response = await fetch(resizedUrl);
