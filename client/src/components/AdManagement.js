@@ -44,31 +44,49 @@ function AdManagement({ ads, selectedAd, onAdSelect, onAdUpload, onAdDelete }) {
       <div className="ads-grid">
         <h4>Available Ads</h4>
         {ads.length === 0 ? (
-          <p className="no-ads">No ads uploaded yet. Upload your first ad above.</p>
+          <p className="no-ads">No ads available. Upload your first ad above.</p>
         ) : (
           <div className="ads-list">
             {ads.map((ad) => (
               <div 
                 key={ad.id} 
-                className={`ad-item ${selectedAd?.id === ad.id ? 'selected' : ''}`}
+                className={`ad-item ${selectedAd?.id === ad.id ? 'selected' : ''} ${ad.type}`}
                 onClick={() => onAdSelect(ad)}
               >
                 <div className="ad-preview">
-                  <img src={ad.url} alt={ad.name} />
+                  <img 
+                    src={ad.type === 'existing' ? ad.imageUrl : ad.url} 
+                    alt={ad.name} 
+                  />
+                  {ad.type === 'existing' && (
+                    <div className="existing-ad-badge">Existing</div>
+                  )}
                 </div>
                 <div className="ad-info">
                   <h5>{ad.name}</h5>
-                  <p>Uploaded: {new Date(ad.uploadedAt).toLocaleDateString()}</p>
+                  {ad.description && <p className="ad-description">{ad.description}</p>}
+                  {ad.type === 'uploaded' ? (
+                    <p>Uploaded: {new Date(ad.uploadedAt).toLocaleDateString()}</p>
+                  ) : (
+                    <p className="ad-category">{ad.category}</p>
+                  )}
+                  {ad.type === 'existing' && (
+                    <div className="ad-links">
+                      <small>Link: {ad.linkUrl}</small>
+                    </div>
+                  )}
                 </div>
-                <button 
-                  className="delete-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onAdDelete(ad.id);
-                  }}
-                >
-                  ×
-                </button>
+                {ad.type === 'uploaded' && (
+                  <button 
+                    className="delete-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onAdDelete(ad.id);
+                    }}
+                  >
+                    ×
+                  </button>
+                )}
               </div>
             ))}
           </div>

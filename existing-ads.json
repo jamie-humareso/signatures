@@ -1,0 +1,92 @@
+[
+  {
+    "id": "hr-consulting",
+    "name": "HR Consulting",
+    "description": "Generic Humareso HR Consulting Ad",
+    "imageUrl": "https://cdn.humareso.com/hubfs/Email%20Attachments/sig_ads/Email_Ads-1-HRConsulting.jpeg?width=970&height=250",
+    "linkUrl": "http://humareso.com?utm_campaign=none&utm_source=email&utm_medium=signature&utm_term=generic&utm_content=block_ad",
+    "utmTerm": "generic",
+    "utmContent": "block_ad",
+    "category": "general"
+  },
+  {
+    "id": "very-best",
+    "name": "Very Best",
+    "description": "Very Best Campaign Ad",
+    "imageUrl": "https://cdn.humareso.com/hubfs/Email%20Attachments/sig_ads/Email_Ads-2-VeryBest.jpeg?width=970&height=250",
+    "linkUrl": "http://humareso.com?utm_campaign=none&utm_source=email&utm_medium=signature&utm_term=very-best&utm_content=block_ad",
+    "utmTerm": "very-best",
+    "utmContent": "block_ad",
+    "category": "campaign"
+  },
+  {
+    "id": "blog",
+    "name": "Blog",
+    "description": "Blog Promotion Ad",
+    "imageUrl": "https://cdn.humareso.com/hubfs/Email%20Attachments/sig_ads/Email_Ads-3-Blog.jpeg?width=970&height=250",
+    "linkUrl": "http://blog.humareso.com?utm_campaign=none&utm_source=email&utm_medium=signature&utm_term=blog&utm_content=block_ad",
+    "utmTerm": "blog",
+    "utmContent": "block_ad",
+    "category": "content"
+  },
+  {
+    "id": "swag-red",
+    "name": "Swag Sale - Red",
+    "description": "Swag Sale Campaign Ad",
+    "imageUrl": "https://cdn.humareso.com/hubfs/Email%20Attachments/sig_ads/Email_Ads-4-SwagSale1.jpeg?width=970&height=250",
+    "linkUrl": "http://swag.humareso.com?utm_campaign=none&utm_source=email&utm_medium=signature&utm_term=swag-red&utm_content=block_ad",
+    "utmTerm": "swag-red",
+    "utmContent": "block_ad",
+    "category": "swag"
+  },
+  {
+    "id": "swag-winter",
+    "name": "Swag - Winter 2025",
+    "description": "Winter 2025 Swag Collection",
+    "imageUrl": "https://cdn.humareso.com/hubfs/Email%20Attachments/sig_ads/Email_Ads-13-Winter.jpeg?width=970&height=250",
+    "linkUrl": "http://swag.humareso.com?utm_campaign=none&utm_source=email&utm_medium=signature&utm_term=swag-winter&utm_content=block_ad",
+    "utmTerm": "swag-winter",
+    "utmContent": "block_ad",
+    "category": "swag"
+  },
+  {
+    "id": "but-first",
+    "name": "BUT FIRST...",
+    "description": "But First Campaign Ad",
+    "imageUrl": "https://cdn.humareso.com/hubfs/Email%20Attachments/sig_ads/Email_Ads-7-BFC.jpeg?width=970&height=250",
+    "linkUrl": "https://bit.ly/4eSF3li",
+    "utmTerm": "but-first",
+    "utmContent": "block_ad",
+    "category": "campaign"
+  },
+  {
+    "id": "verify-diner",
+    "name": "VERIFY - Diner",
+    "description": "Humareso Verify Campaign - Diner",
+    "imageUrl": "https://cdn.humareso.com/hubfs/Email%20Attachments/sig_ads/Email_Ads-9-Humareso%20Verify.jpeg?width=970&height=250",
+    "linkUrl": "https://humareso.com/verify?utm_campaign=none&utm_source=email&utm_medium=signature&utm_term=verify-diner&utm_content=block_ad",
+    "utmTerm": "verify-diner",
+    "utmContent": "block_ad",
+    "category": "verify"
+  },
+  {
+    "id": "verify-logo",
+    "name": "VERIFY - Logo",
+    "description": "Humareso Verify Campaign - Logo",
+    "imageUrl": "https://cdn.humareso.com/hubfs/Email%20Attachments/sig_ads/Email_Ads-10-Humareso%20Verify%202.jpeg?width=970&height=250",
+    "linkUrl": "https://humareso.com/verify?utm_campaign=none&utm_source=email&utm_medium=signature&utm_term=verify-logo&utm_content=block_ad",
+    "utmTerm": "verify-logo",
+    "utmContent": "block_ad",
+    "category": "verify"
+  },
+  {
+    "id": "thankful",
+    "name": "THANKFUL",
+    "description": "Thankful Campaign Ad",
+    "imageUrl": "https://cdn.humareso.com/hubfs/Email%20Attachments/sig_ads/Email_Ads-11-Thankful.jpeg?width=970&height=250",
+    "linkUrl": "https://humareso.com/?utm_campaign=none&utm_source=email&utm_medium=signature&utm_term=thankful&utm_content=block_ad",
+    "utmTerm": "thankful",
+    "utmContent": "block_ad",
+    "category": "campaign"
+  }
+]

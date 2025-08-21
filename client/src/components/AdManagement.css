@@ -85,6 +85,16 @@
   box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
 }
 
+.ad-item.existing {
+  border-color: #28a745;
+  background-color: #f8fff9;
+}
+
+.ad-item.existing:hover {
+  border-color: #28a745;
+  background-color: #f0fff4;
+}
+
 .ad-preview {
   margin-bottom: 1rem;
   text-align: center;
@@ -95,6 +105,19 @@
   height: auto;
   border-radius: 8px;
   border: 1px solid #e1e5e9;
+}
+
+.existing-ad-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: #28a745;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .ad-info h5 {
@@ -108,6 +131,34 @@
   color: #666;
   font-size: 0.9rem;
   margin: 0;
+}
+
+.ad-description {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.5rem !important;
+}
+
+.ad-category {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.ad-links {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e1e5e9;
+}
+
+.ad-links small {
+  color: #999;
+  font-size: 0.8rem;
+  word-break: break-all;
 }
 
 .delete-btn {

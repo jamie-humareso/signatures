@@ -8,7 +8,7 @@ const fs = require('fs-extra');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(helmet());
@@ -53,18 +53,36 @@ fs.ensureDirSync(uploadsDir);
 // Get all uploaded ads
 app.get('/api/ads', async (req, res) => {
   try {
+    // Load existing ads from JSON file
+    let existingAds = [];
+    try {
+      const existingAdsData = await fs.readFile(path.join(__dirname, 'existing-ads.json'), 'utf8');
+      existingAds = JSON.parse(existingAdsData).map(ad => ({
+        ...ad,
+        isExisting: true,
+        type: 'existing'
+      }));
+    } catch (error) {
+      console.log('No existing ads file found, starting with empty list');
+    }
+
+    // Get uploaded ads
     const files = await fs.readdir(uploadsDir);
-    const ads = files
+    const uploadedAds = files
       .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
       .map(file => ({
         id: file,
         name: file.replace(/^[^-]+-/, ''),
         url: `/uploads/${file}`,
-        uploadedAt: fs.statSync(path.join(uploadsDir, file)).mtime
+        uploadedAt: fs.statSync(path.join(uploadsDir, file)).mtime,
+        isExisting: false,
+        type: 'uploaded'
       }))
       .sort((a, b) => b.uploadedAt - a.uploadedAt);
     
-    res.json(ads);
+    // Combine existing and uploaded ads
+    const allAds = [...existingAds, ...uploadedAds];
+    res.json(allAds);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch ads' });
   }

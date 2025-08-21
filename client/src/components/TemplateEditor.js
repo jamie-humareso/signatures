@@ -9,24 +9,38 @@ function TemplateEditor({ templates, selectedAd, onTemplateUpdate }) {
     setLocalTemplates(templates);
   }, [templates]);
 
-  const updateAdInTemplate = (template, adUrl) => {
-    if (!adUrl) return template;
+  const updateAdInTemplate = (template, selectedAd) => {
+    if (!selectedAd) return template;
     
     // Find and replace the ad image in the template
     const adRegex = /<img[^>]*src="[^"]*Email_Ads[^"]*"[^>]*>/i;
-    const newAdHtml = `<img style="border-radius:4px; -webkit-border-radius:4px; -o-border-radius:4px; -ms-border-radius:4px; -moz-border-radius:4px; overflow: hidden; "src="${adUrl}" role="presentation" width="485" class="image__StyledImage-sc-hupvqm-0 kUXePh" style="display: block; max-width: 485px;">`;
     
-    if (adRegex.test(template)) {
-      return template.replace(adRegex, newAdHtml);
-    }
+    let newAdHtml;
+    let adSection;
     
-    // If no existing ad found, insert after the OOO section
-    const oooEndIndex = template.indexOf('<!-- End OOO -->');
-    if (oooEndIndex !== -1) {
-      const beforeOoo = template.substring(0, oooEndIndex + '<!-- End OOO -->'.length);
-      const afterOoo = template.substring(oooEndIndex + '<!-- End OOO -->'.length);
+    if (selectedAd.type === 'existing') {
+      // For existing ads, use the full HTML structure
+      newAdHtml = `<img style="border-radius:4px; -webkit-border-radius:4px; -o-border-radius:4px; -ms-border-radius:4px; -moz-border-radius:4px; overflow: hidden; "src="${selectedAd.imageUrl}" role="presentation" width="485" class="image__StyledImage-sc-hupvqm-0 kUXePh" style="display: block; max-width: 485px;">`;
       
-      const adSection = `
+      adSection = `
+<!-- Start Ad -->
+		<tr>
+			<td height="16">
+			</td>
+		</tr>
+		<tr>
+			<td width="485" height="125">
+				<a href="${selectedAd.linkUrl}">
+					${newAdHtml}
+				</a>		
+			</td>
+		</tr>
+<!-- End Ad -->`;
+    } else {
+      // For uploaded ads, use the local URL
+      newAdHtml = `<img style="border-radius:4px; -webkit-border-radius:4px; -o-border-radius:4px; -ms-border-radius:4px; -moz-border-radius:4px; overflow: hidden; "src="${selectedAd.url}" role="presentation" width="485" class="image__StyledImage-sc-hupvqm-0 kUXePh" style="display: block; max-width: 485px;">`;
+      
+      adSection = `
 <!-- Start Ad -->
 		<tr>
 			<td height="16">
@@ -40,6 +54,17 @@ function TemplateEditor({ templates, selectedAd, onTemplateUpdate }) {
 			</td>
 		</tr>
 <!-- End Ad -->`;
+    }
+    
+    if (adRegex.test(template)) {
+      return template.replace(adRegex, newAdHtml);
+    }
+    
+    // If no existing ad found, insert after the OOO section
+    const oooEndIndex = template.indexOf('<!-- End OOO -->');
+    if (oooEndIndex !== -1) {
+      const beforeOoo = template.substring(0, oooEndIndex + '<!-- End OOO -->'.length);
+      const afterOoo = template.substring(oooEndIndex + '<!-- End OOO -->'.length);
       
       return beforeOoo + adSection + afterOoo;
     }
@@ -57,8 +82,8 @@ function TemplateEditor({ templates, selectedAd, onTemplateUpdate }) {
   const handleSave = () => {
     // Update both templates with the selected ad
     const updatedTemplates = {
-      o365: updateAdInTemplate(localTemplates.o365, selectedAd?.url),
-      hubspot: updateAdInTemplate(localTemplates.hubspot, selectedAd?.url)
+      o365: updateAdInTemplate(localTemplates.o365, selectedAd),
+      hubspot: updateAdInTemplate(localTemplates.hubspot, selectedAd)
     };
     
     onTemplateUpdate(updatedTemplates);
@@ -74,15 +99,15 @@ function TemplateEditor({ templates, selectedAd, onTemplateUpdate }) {
     if (!selectedAd) return null;
     
     return (
-      <button 
-        className="insert-ad-btn"
-        onClick={() => {
-          const updated = updateAdInTemplate(localTemplates[platform], selectedAd.url);
-          handleTemplateChange(platform, updated);
-        }}
-      >
-        Insert Selected Ad
-      </button>
+              <button 
+          className="insert-ad-btn"
+          onClick={() => {
+            const updated = updateAdInTemplate(localTemplates[platform], selectedAd);
+            handleTemplateChange(platform, updated);
+          }}
+        >
+          Insert Selected Ad
+        </button>
     );
   };
 
