@@ -36,7 +36,56 @@ function Preview({ templates, selectedAd }) {
         .replace(/{{ userToken.ooo_visibility }}/g, 'none');
     }
     
+    // Insert selected ad if available
+    if (selectedAd) {
+      previewHtml = insertAdIntoPreview(previewHtml, selectedAd, platform);
+    }
+    
     return previewHtml;
+  };
+
+  const insertAdIntoPreview = (template, ad, platform) => {
+    // Find and replace the ad image in the template
+    const adRegex = /<img[^>]*src="[^"]*Email_Ads[^"]*"[^>]*>/i;
+    
+    let newAdHtml;
+    if (ad.type === 'existing') {
+      // For existing ads, use the proxy image URL
+      newAdHtml = `<img style="border-radius:4px; -webkit-border-radius:4px; -o-border-radius:4px; -ms-border-radius:4px; -moz-border-radius:4px; overflow: hidden; "src="/image-proxy/${encodeURIComponent(ad.imageUrl)}" role="presentation" width="485" class="image__StyledImage-sc-hupvqm-0 kUXePh" style="display: block; max-width: 485px;">`;
+    } else {
+      // For uploaded ads, use the local URL
+      newAdHtml = `<img style="border-radius:4px; -webkit-border-radius:4px; -o-border-radius:4px; -ms-border-radius:4px; -moz-border-radius:4px; overflow: hidden; "src="${ad.url}" role="presentation" width="485" class="image__StyledImage-sc-hupvqm-0 kUXePh" style="display: block; max-width: 485px;">`;
+    }
+    
+    if (adRegex.test(template)) {
+      return template.replace(adRegex, newAdHtml);
+    }
+    
+    // If no existing ad found, insert after the OOO section
+    const oooEndIndex = template.indexOf('<!-- End OOO -->');
+    if (oooEndIndex !== -1) {
+      const beforeOoo = template.substring(0, oooEndIndex + '<!-- End OOO -->'.length);
+      const afterOoo = template.substring(oooEndIndex + '<!-- End OOO -->'.length);
+      
+      const adSection = `
+<!-- Start Ad -->
+		<tr>
+			<td height="16">
+			</td>
+		</tr>
+		<tr>
+			<td width="485" height="125">
+				<a href="${ad.type === 'existing' ? ad.linkUrl : 'https://humareso.com/?utm_campaign=none&utm_source=email&utm_medium=signature&utm_term=generic&utm_content=block_ad'}">
+					${newAdHtml}
+				</a>		
+			</td>
+		</tr>
+<!-- End Ad -->`;
+      
+      return beforeOoo + adSection + afterOoo;
+    }
+    
+    return template;
   };
 
   const o365Preview = createPreviewHtml(templates.o365, 'o365');
@@ -50,7 +99,11 @@ function Preview({ templates, selectedAd }) {
         {selectedAd && (
           <div className="selected-ad-info">
             <span>Previewing with: {selectedAd.name}</span>
-            <img src={selectedAd.url} alt={selectedAd.name} className="selected-ad-thumb" />
+            <img 
+              src={selectedAd.type === 'existing' ? `/image-proxy/${encodeURIComponent(selectedAd.imageUrl)}` : selectedAd.url} 
+              alt={selectedAd.name} 
+              className="selected-ad-thumb" 
+            />
           </div>
         )}
       </div>
