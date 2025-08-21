@@ -62,9 +62,10 @@
 
 .ads-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+  gap: 2rem;
   margin-bottom: 2rem;
+  justify-items: center;
 }
 
 .ad-item {
@@ -75,7 +76,8 @@
   cursor: pointer;
   transition: all var(--transition-normal);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  min-width: 500px;
 }
 
 .ad-item:hover {
@@ -103,6 +105,10 @@
 .ad-preview {
   margin-bottom: 1rem;
   text-align: center;
+  position: relative;
+  width: 485px;
+  height: 125px;
+  margin: 0 auto 1rem auto;
 }
 
 .ad-preview img {
@@ -115,16 +121,17 @@
 
 .existing-ad-badge {
   position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
+  top: 0.25rem;
+  left: 0.25rem;
   background: var(--humareso-green);
   color: var(--text-light);
-  padding: 0.25rem 0.5rem;
+  padding: 0.2rem 0.4rem;
   border-radius: var(--border-radius-sm);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: var(--font-weight-medium);
   text-transform: uppercase;
   box-shadow: var(--shadow-sm);
+  z-index: 10;
 }
 
 .ad-info h5 {
