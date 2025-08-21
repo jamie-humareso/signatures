@@ -17,7 +17,56 @@ app.use(cors());
 app.use(morgan('combined'));
 app.use(express.json());
 
-
+// Proxy route for external CDN images to avoid CORS (must come before static middleware)
+app.get('/image-proxy/:encodedUrl', async (req, res) => {
+  console.log('PROXY ROUTE HIT!', req.params.encodedUrl);
+  try {
+    const encodedUrl = req.params.encodedUrl;
+    const imageUrl = decodeURIComponent(encodedUrl);
+    console.log('Decoded URL:', imageUrl);
+    
+    // Validate that it's a humareso.com URL for security
+    if (!imageUrl.includes('humareso.com')) {
+      console.log('Invalid URL, not humareso.com');
+      return res.status(400).json({ error: 'Invalid image URL' });
+    }
+    
+    // Force 485px width for signature consistency
+    // Remove any existing width/height parameters and set to exact signature size
+    let resizedUrl = imageUrl;
+    if (resizedUrl.includes('?')) {
+      // Remove existing width and height parameters
+      resizedUrl = resizedUrl.replace(/[?&]width=\d+/g, '');
+      resizedUrl = resizedUrl.replace(/[?&]height=\d+/g, '');
+      // Add our exact signature dimensions
+      resizedUrl = resizedUrl.includes('?') 
+        ? `${resizedUrl}&width=485&height=125` 
+        : `${resizedUrl}?width=485&height=125`;
+    } else {
+      resizedUrl = `${resizedUrl}?width=485&height=125`;
+    }
+    console.log('Resized URL:', resizedUrl);
+    
+    const response = await fetch(resizedUrl);
+    console.log('Fetch response status:', response.status);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.status}`);
+    }
+    
+    const contentType = response.headers.get('content-type');
+    console.log('Content type:', contentType);
+    const buffer = await response.arrayBuffer();
+    console.log('Buffer size:', buffer.byteLength);
+    
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+    res.send(Buffer.from(buffer));
+    console.log('Image sent successfully');
+  } catch (error) {
+    console.error('Proxy image error:', error);
+    res.status(500).json({ error: 'Failed to proxy image' });
+  }
+});
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -209,9 +258,19 @@ app.get('/image-proxy/:encodedUrl', async (req, res) => {
     }
     
     // Force 485px width for signature consistency
-    const resizedUrl = imageUrl.includes('?') 
-      ? `${imageUrl}&width=485&height=125` 
-      : `${imageUrl}?width=485&height=125`;
+    // Remove any existing width/height parameters and set to exact signature size
+    let resizedUrl = imageUrl;
+    if (resizedUrl.includes('?')) {
+      // Remove existing width and height parameters
+      resizedUrl = resizedUrl.replace(/[?&]width=\d+/g, '');
+      resizedUrl = resizedUrl.replace(/[?&]height=\d+/g, '');
+      // Add our exact signature dimensions
+      resizedUrl = resizedUrl.includes('?') 
+        ? `${resizedUrl}&width=485&height=125` 
+        : `${resizedUrl}?width=485&height=125`;
+    } else {
+      resizedUrl = `${resizedUrl}?width=485&height=125`;
+    }
     console.log('Resized URL:', resizedUrl);
     
     const response = await fetch(resizedUrl);
