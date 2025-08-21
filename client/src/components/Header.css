@@ -1,8 +1,22 @@
 .header {
-  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--humareso-navy) 0%, var(--humareso-blue-black) 100%);
+  color: var(--text-light);
   padding: 1.5rem 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--humareso-red) 0%, var(--humareso-red-muted) 100%);
+  opacity: 0.1;
+  z-index: 1;
 }
 
 .header-content {
@@ -11,28 +25,33 @@
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .logo h1 {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-black);
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  letter-spacing: -0.5px;
+  letter-spacing: var(--header-spacing);
+  color: var(--text-light);
 }
 
 .title h2 {
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   margin: 0 0 0.5rem 0;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  color: var(--text-light);
 }
 
 .title p {
   font-size: 1rem;
   margin: 0;
   opacity: 0.9;
-  font-weight: 300;
+  font-weight: var(--font-weight-light);
+  color: var(--text-light-80);
 }
 
 @media (max-width: 768px) {

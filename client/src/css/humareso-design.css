@@ -1,0 +1,402 @@
+/* Humareso Design System - CSS Variables */
+@import "fonts.css";
+
+:root {
+  /* Primary Colors */
+  --humareso-red: #EF2E24;
+  --humareso-navy: #032F46;
+  --humareso-off-white: #F4F6F9;
+  
+  /* Reds */
+  --humareso-red-primary: #EF2E24;
+  --humareso-red-dark: #670204;
+  --humareso-red-light: #F9DEDE;
+  --humareso-red-muted: #C9261C;
+  
+  /* Blues */
+  --humareso-blue-black: #050707;
+  --humareso-blue-navy: #032F46;
+  --humareso-blue-light: #CFD8E5;
+  --humareso-blue-off-white: #F4F6F9;
+  
+  /* Text Colors */
+  --text-dark: #1F3440;
+  --text-medium: #3B4B56;
+  --text-light: #FFFFFF;
+  --text-light-80: rgba(255, 255, 255, 0.8);
+  
+  /* Browns */
+  --humareso-brown-dark: #4F1D0B;
+  --humareso-brown-medium: #964C31;
+  
+  /* Analogous & Tetradic Colors */
+  --humareso-orange: #C97C1C;
+  --humareso-yellow-green: #BFC91C;
+  --humareso-green: #68C91C;
+  --humareso-teal: #1EC4CC;
+  --humareso-purple: #7D1ECC;
+  
+  /* Typography */
+  --font-family: 'Elza', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-light: 300;
+  --font-weight-black: 900;
+  
+  /* Spacing & Layout */
+  --header-spacing: -0.02em;
+  --line-height: 1.5;
+  --border-radius: 88px;
+  --border-radius-sm: 44px;
+  --border-radius-lg: 132px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
+
+/* ===== TYPOGRAPHY CLASSES ===== */
+.humareso-text-header {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-black);
+  letter-spacing: var(--header-spacing);
+  line-height: var(--line-height);
+}
+
+.humareso-text-subheader {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-light);
+  letter-spacing: var(--header-spacing);
+  line-height: var(--line-height);
+}
+
+.humareso-text-body {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height);
+}
+
+/* Title alignment - system default left */
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
+}
+
+/* ===== LOGO CLASSES ===== */
+.humareso-logo {
+  background-image: url('https://cdn-hds.humareso.com/images/shared/logos/humareso_logo_original_r.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+}
+
+.humareso-logo-bg-off-white {
+  background-color: var(--humareso-blue-black);
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+}
+
+/* ===== BUTTON SYSTEM ===== */
+
+/* Base button styles */
+.humareso-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1em;
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family);
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  height: 44px;
+  min-height: 44px;
+  letter-spacing: -0.02em;
+  
+  /* Primary button styles as default */
+  background: linear-gradient(180deg, var(--humareso-red) 0%, var(--humareso-red-muted) 100%);
+  color: var(--text-light);
+  border-color: var(--humareso-red);
+}
+
+/* Button states */
+.humareso-btn:hover:not(:disabled) {
+  background: linear-gradient(180deg, var(--humareso-red-muted) 0%, #8B0A0A 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 46, 36, 0.3);
+  color: var(--text-light); /* White text on hover for all buttons */
+}
+
+.humareso-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(239, 46, 36, 0.3);
+}
+
+.humareso-btn:focus {
+  outline: 2px solid var(--humareso-red);
+  outline-offset: 2px;
+}
+
+.humareso-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Button sizes */
+.humareso-btn.humareso-btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.75em !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  line-height: 1.2 !important;
+  font-weight: var(--font-weight-medium) !important;
+  letter-spacing: -0.02em;
+}
+
+.humareso-btn.humareso-btn-lg {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.25em !important;
+  height: 56px !important;
+  min-height: 56px !important;
+  line-height: 1.2 !important;
+  font-weight: var(--font-weight-medium) !important;
+  letter-spacing: -0.03em;
+}
+
+/* Button variants */
+.humareso-btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--humareso-red);
+  border-color: var(--humareso-red);
+}
+
+/* Secondary button hover text color based on background */
+.humareso-btn-secondary:hover:not(:disabled) {
+  background: rgba(239, 46, 36, 0.1);
+  border-color: var(--humareso-red-muted);
+  color: var(--humareso-red-muted);
+}
+
+/* Secondary button on dark background - white text on hover */
+div[style*="background: linear-gradient(135deg, var(--humareso-navy)"] .humareso-btn-secondary:hover:not(:disabled) {
+  color: var(--text-light);
+}
+
+/* Secondary button on light background - text grey on hover */
+.humareso-btn-secondary:hover:not(:disabled) {
+  color: var(--text-medium);
+}
+
+.humareso-btn-success {
+  background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+  color: var(--text-light);
+  border-color: #10b981;
+}
+
+.humareso-btn-success:hover:not(:disabled) {
+  background: linear-gradient(180deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.humareso-btn-info {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+  color: var(--text-light);
+  border-color: #3b82f6;
+}
+
+.humareso-btn-info:hover:not(:disabled) {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.humareso-btn-warning {
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+  color: var(--text-light);
+  border-color: #f59e0b;
+}
+
+.humareso-btn-warning:hover:not(:disabled) {
+  background: linear-gradient(180deg, #d97706 0%, #b45309 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.humareso-btn-danger {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+  color: var(--text-light);
+  border-color: #ef4444;
+  animation: dangerPulse 3s ease-in-out infinite;
+}
+
+.humareso-btn-danger:hover:not(:disabled) {
+  background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  animation: dangerShake 0.5s ease-in-out;
+}
+
+@keyframes dangerPulse {
+  0%, 100% {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+  }
+}
+
+@keyframes dangerShake {
+  0%, 100% {
+    transform: translateY(-1px) translateX(0);
+  }
+  25% {
+    transform: translateY(-1px) translateX(-2px);
+  }
+  75% {
+    transform: translateY(-1px) translateX(2px);
+  }
+}
+
+/* Custom color button support */
+.humareso-btn-custom {
+  background: linear-gradient(180deg, var(--btn-color) 0%, var(--btn-color-dark) 100%);
+  color: var(--text-light);
+  border-color: var(--btn-color);
+}
+
+.humareso-btn-custom:hover:not(:disabled) {
+  background: linear-gradient(180deg, var(--btn-color-dark) 0%, var(--btn-color-darker) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--btn-color-rgb), 0.3);
+}
+
+/* Icon styles */
+.humareso-btn-icon {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+/* Emoji icon support */
+.humareso-btn-icon.emoji {
+  font-size: 1.5em;
+  line-height: 1;
+  width: auto;
+  height: auto;
+}
+
+/* Icon sizing for different button sizes */
+.humareso-btn-sm .humareso-btn-icon {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.humareso-btn-sm .humareso-btn-icon.emoji {
+  font-size: 1.5em;
+  width: auto;
+  height: auto;
+}
+
+.humareso-btn-lg .humareso-btn-icon {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.humareso-btn-lg .humareso-btn-icon.emoji {
+  font-size: 1.5em;
+  width: auto;
+  height: auto;
+}
+
+/* Icon-only buttons - perfect circles */
+.demo-row .humareso-btn-icon-only, .humareso-btn-icon-only {
+  width: 44px !important;
+  min-width: auto !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+}
+
+.humareso-btn-icon-only.humareso-btn-sm {
+  width: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+}
+
+.humareso-btn-icon-only.humareso-btn-lg {
+  width: 56px !important;
+  height: 56px !important;
+  min-height: 56px !important;
+}
+
+/* Loading state */
+.humareso-btn-loading {
+  position: relative;
+  color: transparent;
+}
+
+.humareso-btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50% !important;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Inline button styling */
+.humareso-btn.inline {
+  padding: 0.25rem 1.25rem !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  vertical-align: baseline !important;
+  display: inline !important;
+  line-height: 1 !important;
+  height: auto !important;
+  min-height: auto !important;
+  margin: 0 0 0 0.25rem !important;
+}
+
+/* Button Layout and Grid Styles */
+.demo-row .humareso-btn {
+  font-size: 1em;
+  flex: 1;
+  min-width: 120px;
+}
+
+/* Inline button spacing - only for non-inline buttons */
+.button-section > div > div:not(.demo-row) .humareso-btn:not(.inline) + .humareso-btn:not(.inline) {
+  margin-left: 0.75rem;
+}
+
+/* Remove flex for inline sections */
+.button-section > div > div:not(.demo-row) .humareso-btn:not(.inline) {
+  display: inline-flex;
+}

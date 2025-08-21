@@ -55,7 +55,7 @@ function AdManagement({ ads, selectedAd, onAdSelect, onAdUpload, onAdDelete }) {
               >
                 <div className="ad-preview">
                   <img 
-                    src={ad.type === 'existing' ? `/proxy-image/${encodeURIComponent(ad.imageUrl)}` : ad.url} 
+                    src={ad.type === 'existing' ? `/image-proxy/${encodeURIComponent(ad.imageUrl)}` : ad.url} 
                     alt={ad.name} 
                   />
                   {ad.type === 'existing' && (
@@ -97,7 +97,7 @@ function AdManagement({ ads, selectedAd, onAdSelect, onAdUpload, onAdDelete }) {
         <div className="selected-ad">
           <h4>Selected Ad</h4>
           <div className="selected-ad-content">
-            <img src={selectedAd.type === 'existing' ? `/proxy-image/${encodeURIComponent(selectedAd.imageUrl)}` : selectedAd.url} alt={selectedAd.name} />
+            <img src={selectedAd.type === 'existing' ? `/image-proxy/${encodeURIComponent(selectedAd.imageUrl)}` : selectedAd.url} alt={selectedAd.name} />
             <div>
               <h5>{selectedAd.name}</h5>
               <p>This ad will be used in your email signatures</p>
