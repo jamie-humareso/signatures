@@ -1,0 +1,266 @@
+.deployment {
+  max-width: 100%;
+}
+
+.deployment-warning {
+  display: flex;
+  gap: 1rem;
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.warning-icon {
+  font-size: 2rem;
+  color: #f39c12;
+  flex-shrink: 0;
+}
+
+.warning-content h4 {
+  color: #856404;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.warning-content ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #856404;
+}
+
+.warning-content li {
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.deployment-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.deployment-section {
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.deployment-section h4 {
+  color: #1976d2;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.deployment-section p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.deploy-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.5rem;
+  min-width: 200px;
+}
+
+.deploy-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.deploy-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.deploy-o365 {
+  background-color: #0078d4;
+  color: white;
+}
+
+.deploy-o365:hover:not(:disabled) {
+  background-color: #106ebe;
+}
+
+.deploy-o365.deploying {
+  background-color: #6c757d;
+  animation: pulse 1.5s infinite;
+}
+
+.deploy-hubspot {
+  background-color: #ff7a59;
+  color: white;
+}
+
+.deploy-hubspot:hover:not(:disabled) {
+  background-color: #e65a3d;
+}
+
+.deploy-hubspot.deploying {
+  background-color: #6c757d;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.deployment-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  min-height: 60px;
+}
+
+.status-idle {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #e1e5e9;
+}
+
+.status-deploying {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border: 1px solid #bbdefb;
+}
+
+.status-success {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.status-error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+.status-icon {
+  font-size: 1.2rem;
+}
+
+.status-message {
+  flex: 1;
+  text-align: center;
+}
+
+.status-timestamp {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.deployment-notes {
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.deployment-notes h4 {
+  color: #1976d2;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.note-item h5 {
+  color: #333;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.note-item ul {
+  list-style: none;
+  padding: 0;
+}
+
+.note-item li {
+  padding: 0.5rem 0;
+  color: #666;
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.note-item li:before {
+  content: "→";
+  color: #1976d2;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.note-item li:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+@media (max-width: 1024px) {
+  .deployment-controls {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .notes-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .deployment-warning {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .deployment-section {
+    padding: 1.5rem;
+  }
+  
+  .deploy-btn {
+    min-width: 100%;
+    padding: 0.875rem 1.5rem;
+  }
+  
+  .deployment-status {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .status-message {
+    order: 1;
+  }
+  
+  .status-timestamp {
+    order: 2;
+  }
+}
