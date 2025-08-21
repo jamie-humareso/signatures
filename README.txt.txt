@@ -1,8 +1,14 @@
+# Email Signature Management
+
+## Current Process
+**See [SIGNATURE_UPDATE_PROCESS.md](SIGNATURE_UPDATE_PROCESS.md) for the current manual workflow.**
+
+## Legacy Intune Deployment (Deprecated)
 First run ./signature.ps1 to generate .htm files and pass them to Office 365.
 
 Then run the following to generate intune package:
 
-.\IntuneWinAppUtil.exe -c '.\Source' -s '.\Source\install.ps1' -o '.\Package'`
+.\IntuneWinAppUtil.exe -c '.\Source' -s '.\Source\install.ps1' -o '.\Package'
 
 
 
