@@ -36,6 +36,12 @@ function Preview({ templates, selectedAd }) {
         .replace(/{{ userToken.ooo_visibility }}/g, 'none');
     }
     
+    // Proxy all external humareso.com images to avoid CORS issues in iframe preview
+    previewHtml = previewHtml.replace(
+      /src="(https:\/\/[^"]*humareso\.com[^"]*)"/g,
+      'src="/image-proxy/$1"'
+    );
+    
     // Insert selected ad if available
     if (selectedAd) {
       previewHtml = insertAdIntoPreview(previewHtml, selectedAd, platform);
