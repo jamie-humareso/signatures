@@ -66,7 +66,7 @@ function AdManagement({ ads, selectedAd, onAdSelect, onAdUpload, onAdDelete }) {
                   <h5>{ad.name}</h5>
                   {ad.description && <p className="ad-description">{ad.description}</p>}
                   {ad.type === 'uploaded' ? (
-                    <p>Uploaded: {new Date(ad.uploadedAt).toLocaleDateString()}</p>
+                    <p>Uploaded: {ad.uploadedAt ? new Date(ad.uploadedAt).toLocaleDateString() : 'Unknown'}</p>
                   ) : (
                     <p className="ad-category">{ad.category}</p>
                   )}
