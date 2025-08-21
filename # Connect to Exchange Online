@@ -1,0 +1,23 @@
+# Connect to Exchange Online
+Connect-ExchangeOnline -UserPrincipalName jaquila@humareso.com -ShowProgress $true
+
+# Set the start and end dates
+$endDate = (Get-Date)
+$startDate = $endDate.AddDays(-90)
+
+# Get all active users
+$activeUsers = Get-Mailbox -RecipientTypeDetails UserMailbox | Where-Object { $_.RecipientTypeDetails -eq 'UserMailbox' }
+
+# Loop through each active user and get their audit logs
+foreach ($user in $activeUsers) {
+    $userEmail = $user.PrimarySmtpAddress
+    Write-Output "Fetching audit logs for $userEmail"
+    
+    $auditLogs = Search-UnifiedAuditLog -StartDate $startDate -EndDate $endDate -UserIds $userEmail
+
+    # Process the logs as needed (e.g., save to file, analyze, etc.)
+    $auditLogs | Export-Csv -Path ".\$($userEmail)_AuditLogs.csv" -NoTypeInformation
+}
+
+# Disconnect from Exchange Online
+Disconnect-ExchangeOnline -Confirm:$false
