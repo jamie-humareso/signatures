@@ -41,8 +41,10 @@ function Preview({ templates, selectedAd }) {
     previewHtml = previewHtml.replace(
       /src=["'](https:\/\/[^"']*humareso\.com[^"']*)["']/g,
       (match, url) => {
-        console.log('Proxying image URL:', url);
-        return `src="/image-proxy/${encodeURIComponent(url)}"`;
+        // Decode HTML entities first, then encode for the proxy
+        const decodedUrl = url.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        console.log('Proxying image URL:', decodedUrl);
+        return `src="/image-proxy/${encodeURIComponent(decodedUrl)}"`;
       }
     );
     
