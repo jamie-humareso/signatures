@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const path = require('path');
 const fs = require('fs-extra');
 const { v4: uuidv4 } = require('uuid');
+const fetch = require('node-fetch');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -183,6 +184,34 @@ app.post('/api/deploy/hubspot', async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: 'Deployment failed' });
+  }
+});
+
+// Proxy route for external CDN images to avoid CORS
+app.get('/proxy-image/:encodedUrl', async (req, res) => {
+  try {
+    const encodedUrl = req.params.encodedUrl;
+    const imageUrl = decodeURIComponent(encodedUrl);
+    
+    // Validate that it's a humareso.com URL for security
+    if (!imageUrl.includes('humareso.com')) {
+      return res.status(400).json({ error: 'Invalid image URL' });
+    }
+    
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.status}`);
+    }
+    
+    const contentType = response.headers.get('content-type');
+    const buffer = await response.arrayBuffer();
+    
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+    res.send(Buffer.from(buffer));
+  } catch (error) {
+    console.error('Proxy image error:', error);
+    res.status(500).json({ error: 'Failed to proxy image' });
   }
 });
 

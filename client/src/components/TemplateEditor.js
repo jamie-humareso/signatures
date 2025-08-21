@@ -20,7 +20,7 @@ function TemplateEditor({ templates, selectedAd, onTemplateUpdate }) {
     
     if (selectedAd.type === 'existing') {
       // For existing ads, use the full HTML structure
-      newAdHtml = `<img style="border-radius:4px; -webkit-border-radius:4px; -o-border-radius:4px; -ms-border-radius:4px; -moz-border-radius:4px; overflow: hidden; "src="${selectedAd.imageUrl}" role="presentation" width="485" class="image__StyledImage-sc-hupvqm-0 kUXePh" style="display: block; max-width: 485px;">`;
+      newAdHtml = `<img style="border-radius:4px; -webkit-border-radius:4px; -o-border-radius:4px; -ms-border-radius:4px; -moz-border-radius:4px; overflow: hidden; "src="/proxy-image/${encodeURIComponent(selectedAd.imageUrl)}" role="presentation" width="485" class="image__StyledImage-sc-hupvqm-0 kUXePh" style="display: block; max-width: 485px;">`;
       
       adSection = `
 <!-- Start Ad -->
