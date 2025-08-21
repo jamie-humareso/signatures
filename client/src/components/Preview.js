@@ -37,10 +37,21 @@ function Preview({ templates, selectedAd }) {
     }
     
     // Proxy all external humareso.com images to avoid CORS issues in iframe preview
+    const originalHtml = previewHtml;
     previewHtml = previewHtml.replace(
-      /src="(https:\/\/[^"]*humareso\.com[^"]*)"/g,
-      'src="/image-proxy/$1"'
+      /src=["'](https:\/\/[^"']*humareso\.com[^"']*)["']/g,
+      (match, url) => {
+        console.log('Proxying image URL:', url);
+        return `src="/image-proxy/${encodeURIComponent(url)}"`;
+      }
     );
+    
+    // Log if any images were found and replaced
+    if (originalHtml !== previewHtml) {
+      console.log('Image URLs were proxied in preview');
+    } else {
+      console.log('No external images found to proxy');
+    }
     
     // Insert selected ad if available
     if (selectedAd) {

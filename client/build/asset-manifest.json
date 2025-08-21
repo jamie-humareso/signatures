@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.5d8dd162.css",
-    "main.js": "/static/js/main.5ff41fe3.js",
+    "main.js": "/static/js/main.8484d7b6.js",
     "static/media/elza-medium.otf": "/static/media/elza-medium.8ec3476a46f61b4de598.otf",
     "static/media/elza-semibold.otf": "/static/media/elza-semibold.8ec3476a46f61b4de598.otf",
     "static/media/elza-regular.otf": "/static/media/elza-regular.42113fcad77192d67489.otf",
@@ -9,10 +9,10 @@
     "static/media/elza-bold.otf": "/static/media/elza-bold.3be9b1c1eb7dc76f9982.otf",
     "index.html": "/index.html",
     "main.5d8dd162.css.map": "/static/css/main.5d8dd162.css.map",
-    "main.5ff41fe3.js.map": "/static/js/main.5ff41fe3.js.map"
+    "main.8484d7b6.js.map": "/static/js/main.8484d7b6.js.map"
   },
   "entrypoints": [
     "static/css/main.5d8dd162.css",
-    "static/js/main.5ff41fe3.js"
+    "static/js/main.8484d7b6.js"
   ]
 }
